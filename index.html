@@ -3,8 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoShop - Belanja Pintar (Lite Mode)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#10b981">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>GoShop - Belanja Pintar</title>
     <link rel="manifest" href="./manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -13,14 +16,54 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            overscroll-behavior: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .card-shadow-lg {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        #fab-add-item {
+            bottom: 24px;
+            right: 16px;
+            width: 56px;
+            height: 56px;
+            box-shadow: 0 8px 16px rgba(16, 185, 129, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        #fab-add-item:active {
+            transform: scale(0.9);
+        }
+
+        /* Better touch targets */
+        button,
+        a {
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 
-<body class="min-h-screen">
+<body class="min-h-screen bg-gray-50">
 
-    <div id="app-container" class="max-w-xl mx-auto p-0 pt-0">
+    <div id="app-container" class="max-w-xl mx-auto">
 
         <!-- Gojek-style Header -->
-        <div class="sticky top-0 gojek-header z-10 px-4 pb-6 pt-4">
+        <div class="sticky top-0 gojek-header z-10 px-4 pb-6 pt-4 safe-top">
             <header class="flex justify-between items-center mb-4">
                 <div>
                     <p class="text-white text-sm font-medium opacity-90">Halo,</p>
@@ -28,7 +71,7 @@
                 </div>
 
                 <button id="history-btn" title="Riwayat Transaksi"
-                    class="p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition duration-150">
+                    class="p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition duration-150 active:scale-95">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -51,7 +94,7 @@
                         <span class="text-sm font-semibold text-gray-800">Saldo Budget</span>
                     </div>
                     <button id="budget-btn"
-                        class="text-xs font-bold text-green-600 px-3 py-1.5 bg-green-50 rounded-full hover:bg-green-100 transition duration-150">
+                        class="text-xs font-bold text-green-600 px-3 py-1.5 bg-green-50 rounded-full hover:bg-green-100 transition duration-150 active:scale-95">
                         Atur
                     </button>
                 </div>
@@ -75,18 +118,18 @@
             </p>
         </div>
 
-        <div class="p-4 pt-4">
-            <div class="mb-4 flex justify-between items-center">
+        <div class="p-4 pt-4 pb-24">
+            <div class="mb-4 flex justify-between items-center flex-wrap gap-2">
                 <h2 class="text-lg font-bold text-gray-900" id="list-title">📋 Daftar Belanja</h2>
 
                 <div class="flex space-x-2">
                     <button id="complete-shopping-btn"
-                        class="bg-green-600 text-white px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-green-700 transition duration-150 shadow-sm disabled:opacity-50 disabled:bg-gray-300"
+                        class="bg-green-600 text-white px-3 py-2 text-xs font-semibold rounded-lg hover:bg-green-700 transition duration-150 shadow-sm disabled:opacity-50 disabled:bg-gray-300 active:scale-95"
                         disabled>
                         ✓ Selesai
                     </button>
                     <button id="reset-list-btn"
-                        class="bg-gray-100 text-gray-700 px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-gray-200 transition duration-150 disabled:opacity-50"
+                        class="bg-gray-100 text-gray-700 px-3 py-2 text-xs font-semibold rounded-lg hover:bg-gray-200 transition duration-150 disabled:opacity-50 active:scale-95"
                         disabled>
                         ↻ Reset
                     </button>
@@ -111,7 +154,8 @@
 
     </div>
 
-    <button id="fab-add-item" class="fixed rounded-full btn-primary text-white flex items-center justify-center">
+    <button id="fab-add-item" class="fixed rounded-full btn-primary text-white flex items-center justify-center z-40"
+        style="bottom: 24px; right: 16px; width: 56px; height: 56px;">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"
             stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -134,9 +178,9 @@
                 </div>
                 <div class="flex justify-end space-x-3 pt-2">
                     <button type="button" id="add-modal-cancel-btn"
-                        class="px-5 py-3 text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition font-semibold">Batal</button>
+                        class="px-5 py-3 text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition font-semibold active:scale-95">Batal</button>
                     <button type="submit"
-                        class="px-6 py-3 btn-primary text-white rounded-xl transition duration-150 shadow-lg flex items-center font-bold">
+                        class="px-6 py-3 btn-primary text-white rounded-xl transition duration-150 shadow-lg flex items-center font-bold active:scale-95">
                         Tambahkan
                     </button>
                 </div>
@@ -153,10 +197,10 @@
             <p class="text-gray-600 text-sm mb-6" id="modal-message">Yakin nih mau lanjut?</p>
             <div class="flex justify-end space-x-3">
                 <button id="modal-cancel-btn"
-                    class="px-5 py-2.5 text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition font-semibold">Gak
+                    class="px-5 py-2.5 text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition font-semibold active:scale-95">Gak
                     Jadi</button>
                 <button id="modal-confirm-btn"
-                    class="px-5 py-2.5 text-white bg-green-600 rounded-xl hover:bg-green-700 transition font-semibold">Ya,
+                    class="px-5 py-2.5 text-white bg-green-600 rounded-xl hover:bg-green-700 transition font-semibold active:scale-95">Ya,
                     Lanjut</button>
             </div>
         </div>
@@ -180,9 +224,9 @@
                 </div>
                 <div class="flex justify-end space-x-3 pt-2">
                     <button type="button" id="edit-modal-cancel-btn"
-                        class="px-5 py-2.5 text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition font-semibold">Batal</button>
+                        class="px-5 py-2.5 text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition font-semibold active:scale-95">Batal</button>
                     <button type="submit"
-                        class="px-5 py-2.5 text-white bg-green-600 rounded-xl hover:bg-green-700 transition font-semibold">Simpan</button>
+                        class="px-5 py-2.5 text-white bg-green-600 rounded-xl hover:bg-green-700 transition font-semibold active:scale-95">Simpan</button>
                 </div>
             </form>
         </div>
@@ -205,14 +249,15 @@
                 <p class="text-sm text-gray-600">Tentukan budget biar belanjanya gak over ya!</p>
                 <input type="number" id="budget-amount" placeholder="Masukkan budget (cth: 500000)" min="0" required
                     class="w-full p-4 border-2 border-gray-100 rounded-xl focus:outline-none focus:border-green-500 text-lg font-semibold">
-                <div class="flex justify-between pt-2">
+                <div class="flex justify-between pt-2 flex-wrap gap-2">
                     <button type="button" id="delete-budget-btn"
-                        class="text-red-500 hover:text-red-600 transition text-sm font-semibold">Hapus Budget</button>
+                        class="text-red-500 hover:text-red-600 transition text-sm font-semibold active:scale-95">Hapus
+                        Budget</button>
                     <div class="flex space-x-3">
                         <button type="button" id="budget-modal-cancel-btn"
-                            class="px-5 py-2.5 text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition font-semibold">Batal</button>
+                            class="px-5 py-2.5 text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition font-semibold active:scale-95">Batal</button>
                         <button type="submit"
-                            class="px-5 py-2.5 text-white bg-green-600 rounded-xl hover:bg-green-700 transition font-semibold">Simpan</button>
+                            class="px-5 py-2.5 text-white bg-green-600 rounded-xl hover:bg-green-700 transition font-semibold active:scale-95">Simpan</button>
                     </div>
                 </div>
             </form>
@@ -223,10 +268,10 @@
     <div id="history-modal"
         class="modal fixed inset-0 flex items-end justify-center z-50 opacity-0 invisible modal-background">
         <div class="w-full max-w-xl h-4/5 bg-white p-6 rounded-t-3xl shadow-2xl overflow-y-auto modal-bottom-sheet">
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex justify-between items-center mb-6 sticky top-0 bg-white pb-4">
                 <h3 class="text-2xl font-bold text-gray-800">Riwayat Belanja</h3>
                 <button id="history-modal-close-btn"
-                    class="p-2 rounded-full text-gray-600 hover:bg-gray-100 transition">
+                    class="p-2 rounded-full text-gray-600 hover:bg-gray-100 transition active:scale-95">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
