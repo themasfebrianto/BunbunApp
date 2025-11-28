@@ -4,105 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoShop - Belanja Pintar</title>
+    <title>GoShop - Belanja Pintar (Lite Mode)</title>
     <link rel="manifest" href="./manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <style>
-        body {
-            font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(180deg, #00AA13 0%, #00AA13 180px, #f8f9fa 180px, #f8f9fa 100%);
-            min-height: 100vh;
-        }
 
-        /* Gojek Green Color Scheme */
-        .btn-primary {
-            background-color: #00AA13;
-            transition: background-color 0.2s, transform 0.1s;
-        }
-
-        .btn-primary:hover {
-            background-color: #009911;
-        }
-
-        .btn-primary:active {
-            transform: scale(0.98);
-        }
-
-        /* Style untuk item yang sudah dibeli */
-        .item-row {
-            transition: all 0.3s ease-out;
-            border-left: 4px solid transparent;
-            margin-bottom: 8px;
-            background: white;
-            border-radius: 12px;
-        }
-
-        .item-row.purchased {
-            background-color: #f0f9f1;
-            border-left: 4px solid #00AA13;
-        }
-
-        .item-row.purchased .item-name,
-        .item-row.purchased .item-price,
-        .item-row.purchased .item-qty,
-        .item-row.purchased .item-unit-price {
-            text-decoration: line-through;
-            color: #9ca3af;
-        }
-
-        /* Gojek-style shadow */
-        .card-shadow {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .card-shadow-lg {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-        }
-
-        /* FAB Styles - Gojek Green */
-        #fab-add-item {
-            bottom: 24px;
-            right: 24px;
-            width: 60px;
-            height: 60px;
-            z-index: 50;
-            box-shadow: 0 6px 20px rgba(0, 170, 19, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        #fab-add-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 24px rgba(0, 170, 19, 0.5);
-        }
-
-        /* Modal Bottom Sheet Animation */
-        .modal-bottom-sheet {
-            transform: translateY(100%);
-            transition: transform 0.3s ease-out;
-        }
-
-        .modal-bottom-sheet.show {
-            transform: translateY(0);
-        }
-
-        .modal-background {
-            transition: opacity 0.3s ease-out;
-        }
-
-        /* Progress Bar Transition - Gojek Green */
-        #budget-progress-bar {
-            transition: width 0.5s ease-out;
-            background: linear-gradient(90deg, #00AA13 0%, #00d41a 100%);
-        }
-
-        /* Gojek-style header gradient */
-        .gojek-header {
-            background: linear-gradient(135deg, #00AA13 0%, #00d41a 100%);
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="min-h-screen">
@@ -161,7 +71,8 @@
                 </div>
             </div>
 
-            <p class="text-xs text-white text-opacity-70 mt-3" id="user-info">Memuat...</p>
+            <p class="text-xs text-white text-opacity-70 mt-3" id="user-info">Mode Offline - Data tersimpan di browser
+            </p>
         </div>
 
         <div class="p-4 pt-4">
@@ -207,7 +118,7 @@
         </svg>
     </button>
 
-
+    <!-- Add Item Modal -->
     <div id="add-item-modal"
         class="modal fixed inset-0 flex items-end justify-center z-50 opacity-0 invisible modal-background">
         <div class="w-full max-w-xl bg-white p-6 rounded-t-3xl shadow-2xl modal-bottom-sheet">
@@ -233,7 +144,7 @@
         </div>
     </div>
 
-
+    <!-- Confirmation Modal -->
     <div id="confirmation-modal"
         class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 invisible">
         <div
@@ -251,6 +162,7 @@
         </div>
     </div>
 
+    <!-- Edit Item Modal -->
     <div id="edit-item-modal"
         class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 invisible">
         <div
@@ -276,6 +188,7 @@
         </div>
     </div>
 
+    <!-- Budget Modal -->
     <div id="budget-modal"
         class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 invisible">
         <div
@@ -289,8 +202,7 @@
                 Atur Budget Belanja
             </h3>
             <form id="budget-form" class="space-y-4">
-                <p class="text-sm text-gray-600">Tentukan budget biar belanjanya gak over ya!
-                </p>
+                <p class="text-sm text-gray-600">Tentukan budget biar belanjanya gak over ya!</p>
                 <input type="number" id="budget-amount" placeholder="Masukkan budget (cth: 500000)" min="0" required
                     class="w-full p-4 border-2 border-gray-100 rounded-xl focus:outline-none focus:border-green-500 text-lg font-semibold">
                 <div class="flex justify-between pt-2">
@@ -307,7 +219,7 @@
         </div>
     </div>
 
-
+    <!-- History Modal -->
     <div id="history-modal"
         class="modal fixed inset-0 flex items-end justify-center z-50 opacity-0 invisible modal-background">
         <div class="w-full max-w-xl h-4/5 bg-white p-6 rounded-t-3xl shadow-2xl overflow-y-auto modal-bottom-sheet">
@@ -326,647 +238,14 @@
                 <p id="history-empty-state" class="text-center py-10 text-gray-500 hidden">Belum ada riwayat belanja.
                 </p>
             </div>
-
         </div>
     </div>
-    <script type="module">
-        // Import modul-modul Firebase yang diperlukan
-        return collection(db, `artifacts/${appId}/users/${userId}/grocery_list`);
 
+    <!-- App Scripts (Loaded sequentially) -->
+    <script src="js/store.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
 
-        function getBudgetConfigRef(appId, userId) {
-            return doc(db, `artifacts/${appId}/users/${userId}/config/user_config`);
-        }
-
-        // NEW: History Collection Reference
-        function getHistoryCollectionRef(appId, userId) {
-            return collection(db, `artifacts/${appId}/users/${userId}/shopping_history`);
-        }
-        // END NEW UTILITIES
-
-
-        // --- FIRESTORE OPERATIONS (List) ---
-
-        async function addItem(name, qty, price) {
-            if (!db || !userId) return console.error("Database atau User ID belum siap.");
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-            // Memastikan price adalah float, default 0
-            const parsedPrice = parseFloat(price) || 0;
-            const parsedQty = parseInt(qty) || 1;
-
-            const newItem = {
-                name: name.trim(),
-                qty: parsedQty,
-                price: parsedPrice, // Harga Satuan
-                isPurchased: false,
-                createdAt: Date.now(),
-            };
-
-            try {
-                await addDoc(getCollectionRef(appId, userId), newItem);
-                modalItemNameInput.value = '';
-                modalItemQtyInput.value = '1';
-                modalItemPriceInput.value = '';
-                hideAddItemModal(); // Tutup modal setelah berhasil
-            } catch (error) {
-                console.error("Gagal menambah item:", error);
-            }
-        }
-
-        async function togglePurchased(docId, currentStatus) {
-            if (!db || !userId) return;
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-            try {
-                const itemRef = doc(getCollectionRef(appId, userId), docId);
-                await updateDoc(itemRef, {
-                    isPurchased: !currentStatus,
-                });
-            } catch (error) {
-                console.error("Gagal mengubah status item:", error);
-            }
-        }
-
-        async function deleteItem(docId) {
-            if (!db || !userId) return;
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-            try {
-                const itemRef = doc(getCollectionRef(appId, userId), docId);
-                await deleteDoc(itemRef);
-            } catch (error) {
-                console.error("Gagal menghapus item:", error);
-            }
-        }
-
-        async function editItemDetails(docId, name, qty, price) {
-            if (!db || !userId) return;
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-            const parsedPrice = parseFloat(price) || 0;
-            const parsedQty = parseInt(qty) || 1;
-
-            try {
-                const itemRef = doc(getCollectionRef(appId, userId), docId);
-                await updateDoc(itemRef, {
-                    name: name.trim(),
-                    qty: parsedQty,
-                    price: parsedPrice, // Harga Satuan
-                });
-                hideEditModal();
-            } catch (error) {
-                console.error("Gagal mengedit item:", error);
-            }
-        }
-
-        async function resetAllItems() {
-            if (!db || !userId) return;
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-            try {
-                const q = query(getCollectionRef(appId, userId), where("isPurchased", "==", true));
-                const snapshot = await getDocs(q);
-
-                const batch = writeBatch(db);
-                snapshot.docs.forEach((document) => {
-                    batch.update(document.ref, { isPurchased: false });
-                });
-
-                await batch.commit();
-                console.log("Semua status belanja berhasil di-reset.");
-                hideConfirmationModal(); // Tutup modal setelah berhasil
-
-            } catch (error) {
-                console.error("Gagal melakukan reset status:", error);
-            }
-        }
-
-        // --- FIRESTORE OPERATIONS (Budget) ---
-
-        async function saveBudget(amount) {
-            if (!db || !userId) return console.error("Database atau User ID belum siap.");
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const budgetRef = getBudgetConfigRef(appId, userId);
-
-            try {
-                await setDoc(budgetRef, { budget: amount }, { merge: true });
-                hideBudgetModal();
-            } catch (error) {
-                console.error("Gagal menyimpan budget:", error);
-            }
-        }
-
-        async function deleteBudget() {
-            if (!db || !userId) return console.error("Database atau User ID belum siap.");
-
-            // Set budget ke 0
-            await saveBudget(0);
-        }
-
-
-        // NEW: HISTORY & COMPLETE SHOPPING LOGIC
-        async function completeShopping() {
-            if (!db || !userId) return console.error("Database atau User ID belum siap.");
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-            try {
-                // 1. Ambil semua item yang SUDAH dibeli
-                const purchasedQuery = query(getCollectionRef(appId, userId), where("isPurchased", "==", true));
-                const purchasedSnapshot = await getDocs(purchasedQuery);
-
-                if (purchasedSnapshot.empty) {
-                    showConfirmationModal('Perhatian', 'Tidak ada item yang telah dibeli untuk disimpan ke riwayat.', () => { }, false, 'Tutup');
-                    return;
-                }
-
-                // 2. Hitung total biaya
-                let totalSpent = 0;
-                const purchasedItems = [];
-                purchasedSnapshot.docs.forEach(doc => {
-                    const itemData = doc.data();
-                    totalSpent += (itemData.price || 0) * itemData.qty;
-                    purchasedItems.push(itemData);
-                });
-
-                // 3. Buat objek Riwayat Belanja
-                const historyRecord = {
-                    date: new Date().toISOString(),
-                    items: purchasedItems,
-                    totalSpent: totalSpent,
-                    totalBudget: currentBudget, // Ambil anggaran saat ini
-                    userId: userId,
-                };
-
-                // 4. Simpan ke koleksi shopping_history
-                await addDoc(getHistoryCollectionRef(appId, userId), historyRecord);
-
-                // 5. Hapus semua item yang sudah dibeli dari grocery_list
-                const batch = writeBatch(db);
-                purchasedSnapshot.docs.forEach(document => {
-                    batch.delete(document.ref);
-                });
-                await batch.commit();
-
-                // 6. Reset budget 
-                await saveBudget(0);
-
-                showConfirmationModal('Selesai Belanja', `Belanja Selesai! Rp ${formatRupiah(totalSpent, false)} telah disimpan ke Riwayat.`, () => { }, false, 'OK');
-
-            } catch (error) {
-                console.error("Gagal menyelesaikan belanja:", error);
-                showConfirmationModal('Gagal', 'Gagal menyelesaikan belanja. Cek konsol untuk detail.', () => { }, false, 'Tutup');
-            }
-        }
-        // END NEW LOGIC
-
-
-        // --- REAL-TIME DATA LISTENERS ---
-
-        let listData = [];
-        let historyData = []; // NEW: History Data
-
-        function startBudgetListener(appId, userId) {
-            if (!db || !userId) return;
-            const budgetRef = getBudgetConfigRef(appId, userId);
-
-            onSnapshot(budgetRef, (docSnap) => {
-                if (docSnap.exists() && docSnap.data().budget > 0) {
-                    currentBudget = parseFloat(docSnap.data().budget);
-                    budgetAmountInput.value = currentBudget;
-
-                } else {
-                    currentBudget = 0;
-                    budgetAmountInput.value = '';
-                }
-                renderList(listData, currentBudget);
-            }, (error) => {
-                console.error("Error mendengarkan budget:", error);
-            });
-        }
-
-
-        function startRealtimeListener(appId, userId) {
-            if (!db || !userId) return;
-
-            const q = query(getCollectionRef(appId, userId), orderBy("createdAt")); // Urutkan berdasarkan waktu ditambahkan
-
-            onSnapshot(q, (snapshot) => {
-                const items = [];
-                snapshot.forEach(doc => {
-                    items.push({ id: doc.id, ...doc.data() });
-                });
-                listData = items;
-                renderList(items, currentBudget);
-            }, (error) => {
-                console.error("Error mendengarkan snapshot:", error);
-            });
-        }
-
-        // NEW: History Listener
-        function startHistoryListener(appId, userId) {
-            if (!db || !userId) return;
-            // Query: Ambil 10 riwayat terakhir, diurutkan berdasarkan tanggal terbaru
-            const q = query(getHistoryCollectionRef(appId, userId), orderBy("date", "desc"), limit(10));
-
-            onSnapshot(q, (snapshot) => {
-                historyData = [];
-                snapshot.forEach(doc => {
-                    historyData.push({ id: doc.id, ...doc.data() });
-                });
-                renderHistoryModal(historyData);
-            }, (error) => {
-                console.error("Error mendengarkan riwayat:", error);
-            });
-        }
-        // END NEW LISTENERS
-
-
-        // --- UI RENDERING & LOGIC ---
-
-        function formatRupiah(number, includeCurrency = true) {
-            if (!isFinite(number)) number = 0;
-
-            const formatter = new Intl.NumberFormat('id-ID', {
-                style: includeCurrency ? 'currency' : 'decimal',
-                currency: 'IDR',
-                minimumFractionDigits: 0
-            });
-
-            return formatter.format(number).replace(includeCurrency ? 'IDR' : '', includeCurrency ? 'Rp' : '').trim();
-        }
-
-        // Modal Handlers (Generic for Confirmation/Edit/Budget/History)
-        function showModal(modalEl, isBottomSheet = false) {
-            modalEl.classList.remove('invisible', 'opacity-0');
-            modalEl.classList.add('opacity-100');
-
-            if (isBottomSheet) {
-                const sheet = modalEl.querySelector('.modal-bottom-sheet');
-                if (sheet) {
-                    setTimeout(() => sheet.classList.add('show'), 10);
-                }
-            }
-        }
-
-        function hideModal(modalEl, isBottomSheet = false) {
-            if (isBottomSheet) {
-                const sheet = modalEl.querySelector('.modal-bottom-sheet');
-                if (sheet) {
-                    sheet.classList.remove('show');
-                }
-            }
-
-            modalEl.classList.remove('opacity-100');
-            modalEl.classList.add('opacity-0');
-
-            setTimeout(() => {
-                modalEl.classList.add('invisible');
-            }, 300);
-        }
-
-        // Specific Modal Functions
-        function showAddItemModal() {
-            showModal(addItemModal, true);
-        }
-
-        function hideAddItemModal() {
-            hideModal(addItemModal, true);
-        }
-
-        function showEditModal(itemId, itemName, itemQty, itemPrice) {
-            editItemIdInput.value = itemId;
-            editItemNameInput.value = itemName;
-            editItemQtyInput.value = itemQty;
-            editItemPriceInput.value = itemPrice || '';
-            showModal(editModal);
-        }
-
-        function hideEditModal() {
-            hideModal(editModal);
-        }
-
-        function showBudgetModal() {
-            showModal(budgetModal);
-        }
-
-        function hideBudgetModal() {
-            hideModal(budgetModal);
-        }
-
-        function showHistoryModal() {
-            showModal(historyModal, true);
-        }
-
-        function hideHistoryModal() {
-            hideModal(historyModal, true);
-        }
-
-        function showConfirmationModal(title, message, onConfirm, showCancel = true, confirmText = 'Ya, Lakukan') {
-            modalTitle.textContent = title;
-            modalMessage.textContent = message;
-            modalConfirmBtn.textContent = confirmText;
-
-            if (!showCancel) {
-                modalCancelBtn.style.display = 'none';
-            } else {
-                modalCancelBtn.style.display = 'inline-block';
-            }
-
-            // Remove previous listeners
-            const newConfirmBtn = modalConfirmBtn.cloneNode(true);
-            modalConfirmBtn.parentNode.replaceChild(newConfirmBtn, modalConfirmBtn);
-
-            newConfirmBtn.addEventListener('click', () => {
-                onConfirm();
-                hideConfirmationModal();
-            });
-
-            showModal(modal);
-        }
-
-        function hideConfirmationModal() {
-            hideModal(modal);
-        }
-
-
-        // --- RENDER LIST ---
-        function renderList(items, budget) {
-            listContainer.innerHTML = '';
-
-            if (items.length === 0) {
-                emptyState.classList.remove('hidden');
-                resetBtn.disabled = true;
-                completeShoppingBtn.disabled = true;
-                return;
-            }
-
-            emptyState.classList.add('hidden');
-
-            let totalCost = 0;
-            let hasPurchased = false;
-
-            items.forEach(item => {
-                const itemCost = (item.price || 0) * item.qty;
-                totalCost += itemCost;
-
-                if (item.isPurchased) {
-                    hasPurchased = true;
-                }
-
-                const itemRow = document.createElement('div');
-                itemRow.className = `item-row p-4 flex items-center justify-between ${item.isPurchased ? 'purchased' : ''}`;
-
-                itemRow.innerHTML = `
-                    <div class="flex items-center flex-1">
-                        <input type="checkbox" ${item.isPurchased ? 'checked' : ''} 
-                            class="w-5 h-5 text-green-600 rounded focus:ring-green-500 mr-3 cursor-pointer"
-                            data-id="${item.id}" data-status="${item.isPurchased}">
-                        <div class="flex-1">
-                            <p class="item-name font-semibold text-gray-900">${item.name}</p>
-                            <p class="text-xs text-gray-500">
-                                <span class="item-qty">${item.qty}x</span>
-                                ${item.price > 0 ? `<span class="item-unit-price">@ Rp ${formatRupiah(item.price, false)}</span>` : ''}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <span class="item-price font-bold text-gray-900">${item.price > 0 ? formatRupiah(itemCost) : '-'}</span>
-                        <button class="edit-btn p-2 text-gray-400 hover:text-green-600 transition" data-id="${item.id}" 
-                            data-name="${item.name}" data-qty="${item.qty}" data-price="${item.price || ''}">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                            </svg>
-                        </button>
-                        <button class="delete-btn p-2 text-gray-400 hover:text-red-600 transition" data-id="${item.id}">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                        </button>
-                    </div>
-                `;
-
-                listContainer.appendChild(itemRow);
-            });
-
-            // Update Budget Display
-            const remaining = budget - totalCost;
-            const progressPercent = budget > 0 ? Math.min((totalCost / budget) * 100, 100) : 0;
-
-            budgetProgressBar.style.width = `${progressPercent}%`;
-            budgetRemainingText.querySelector('.text-2xl').textContent = formatRupiah(remaining);
-            listCostText.textContent = formatRupiah(totalCost);
-
-            // Change color based on budget status
-            if (remaining < 0) {
-                budgetRemainingText.querySelector('.text-2xl').classList.remove('text-gray-900');
-                budgetRemainingText.querySelector('.text-2xl').classList.add('text-red-600');
-            } else {
-                budgetRemainingText.querySelector('.text-2xl').classList.remove('text-red-600');
-                budgetRemainingText.querySelector('.text-2xl').classList.add('text-gray-900');
-            }
-
-            // Enable/Disable buttons
-            resetBtn.disabled = !hasPurchased;
-            completeShoppingBtn.disabled = !hasPurchased;
-
-            // Attach event listeners
-            attachItemEventListeners();
-        }
-
-        function attachItemEventListeners() {
-            // Checkbox toggle
-            document.querySelectorAll('.item-row input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', (e) => {
-                    const itemId = e.target.dataset.id;
-                    const currentStatus = e.target.dataset.status === 'true';
-                    togglePurchased(itemId, currentStatus);
-                });
-            });
-
-            // Edit buttons
-            document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const button = e.currentTarget;
-                    showEditModal(
-                        button.dataset.id,
-                        button.dataset.name,
-                        button.dataset.qty,
-                        button.dataset.price
-                    );
-                });
-            });
-
-            // Delete buttons
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const itemId = e.currentTarget.dataset.id;
-                    showConfirmationModal(
-                        'Hapus Item',
-                        'Yakin mau hapus item ini?',
-                        () => deleteItem(itemId)
-                    );
-                });
-            });
-        }
-
-        // --- RENDER HISTORY ---
-        function renderHistoryModal(historyItems) {
-            historyListContainer.innerHTML = '';
-
-            if (historyItems.length === 0) {
-                historyEmptyState.classList.remove('hidden');
-                return;
-            }
-
-            historyEmptyState.classList.add('hidden');
-
-            historyItems.forEach(record => {
-                const date = new Date(record.date);
-                const formattedDate = date.toLocaleDateString('id-ID', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-
-                const historyCard = document.createElement('div');
-                historyCard.className = 'bg-white p-4 rounded-xl border border-gray-100';
-
-                let itemsHTML = '';
-                record.items.forEach(item => {
-                    itemsHTML += `
-                        <div class="flex justify-between text-sm py-1">
-                            <span class="text-gray-700">${item.name} (${item.qty}x)</span>
-                            <span class="text-gray-900 font-medium">${formatRupiah((item.price || 0) * item.qty)}</span>
-                        </div>
-                    `;
-                });
-
-                historyCard.innerHTML = `
-                    <div class="flex justify-between items-start mb-3">
-                        <div>
-                            <p class="font-bold text-gray-900">${formattedDate}</p>
-                            <p class="text-xs text-gray-500">${date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}</p>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-xs text-gray-500">Total Belanja</p>
-                            <p class="text-lg font-bold text-green-600">${formatRupiah(record.totalSpent)}</p>
-                        </div>
-                    </div>
-                    <div class="border-t border-gray-100 pt-2">
-                        ${itemsHTML}
-                    </div>
-                    ${record.totalBudget > 0 ? `
-                        <div class="mt-3 pt-3 border-t border-gray-100 flex justify-between text-xs">
-                            <span class="text-gray-500">Budget: ${formatRupiah(record.totalBudget)}</span>
-                            <span class="${record.totalSpent <= record.totalBudget ? 'text-green-600' : 'text-red-600'} font-semibold">
-                                ${record.totalSpent <= record.totalBudget ? 'Hemat!' : 'Over Budget'}
-                            </span>
-                        </div>
-                    ` : ''}
-                `;
-
-                historyListContainer.appendChild(historyCard);
-            });
-        }
-
-
-        // --- EVENT LISTENERS SETUP ---
-        function setupEventListeners() {
-            // FAB - Add Item
-            fabBtn.addEventListener('click', showAddItemModal);
-
-            // Add Item Form
-            addItemForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = modalItemNameInput.value;
-                const qty = modalItemQtyInput.value;
-                const price = modalItemPriceInput.value;
-                addItem(name, qty, price);
-            });
-
-            addModalCancelBtn.addEventListener('click', hideAddItemModal);
-
-            // Edit Item Form
-            editForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const id = editItemIdInput.value;
-                const name = editItemNameInput.value;
-                const qty = editItemQtyInput.value;
-                const price = editItemPriceInput.value;
-                editItemDetails(id, name, qty, price);
-            });
-
-            editModalCancelBtn.addEventListener('click', hideEditModal);
-
-            // Budget Modal
-            budgetBtn.addEventListener('click', showBudgetModal);
-
-            budgetForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const amount = parseFloat(budgetAmountInput.value) || 0;
-                saveBudget(amount);
-            });
-
-            budgetModalCancelBtn.addEventListener('click', hideBudgetModal);
-
-            deleteBudgetBtn.addEventListener('click', () => {
-                showConfirmationModal(
-                    'Hapus Budget',
-                    'Yakin mau hapus budget?',
-                    deleteBudget
-                );
-            });
-
-            // Reset List
-            resetBtn.addEventListener('click', () => {
-                showConfirmationModal(
-                    'Reset Status',
-                    'Yakin mau reset semua status belanja?',
-                    resetAllItems
-                );
-            });
-
-            // Complete Shopping
-            completeShoppingBtn.addEventListener('click', () => {
-                showConfirmationModal(
-                    'Selesai Belanja',
-                    'Simpan belanjaan ini ke riwayat dan hapus dari daftar?',
-                    completeShopping
-                );
-            });
-
-            // History Modal
-            historyBtn.addEventListener('click', showHistoryModal);
-            historyModalCloseBtn.addEventListener('click', hideHistoryModal);
-
-            // Confirmation Modal Cancel
-            modalCancelBtn.addEventListener('click', hideConfirmationModal);
-
-            // Close modals on background click
-            [addItemModal, editModal, budgetModal, modal, historyModal].forEach(modalEl => {
-                modalEl.addEventListener('click', (e) => {
-                    if (e.target === modalEl) {
-                        if (modalEl === addItemModal || modalEl === historyModal) {
-                            hideModal(modalEl, true);
-                        } else {
-                            hideModal(modalEl);
-                        }
-                    }
-                });
-            });
-        }
-
-        // --- INITIALIZE APP ---
-        // PENTING: Setup event listeners DULU sebelum Firebase
-        // Agar tombol tetap berfungsi meskipun Firebase gagal
-        setupEventListeners();
-
-        // Baru kemudian initialize Firebase
-        initializeFirebase();
-
-    </script>
 </body>
 
 </html>
